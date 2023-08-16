@@ -31,3 +31,37 @@ function playRound(playerSelection, computerSelection) {
         else return "Win, scissors > paper";
     }
 }
+
+/**
+ *  Plays a best of 5 between the human and computer and keeps score
+ *      reports the winner and loser at the end
+ * 
+ * @javadoc style comments if i wasn't lazy
+*/ 
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    
+    // loop until either player or computer reaches score of 5
+    while(playerScore < 5 && computerScore < 5) {
+        // prompt player to pick, no functionality to check for IllegalStateException yet
+        let playerSelection = prompt("Pick: Rock, Paper, Scissors");
+        playerSelection = playerSelection.toLowerCase();
+        const outcome = playRound(playerSelection, getComputerChoice());
+
+        // print out outcome of game
+        console.log(outcome);
+
+        // if string begins with D, draw and continue, else if 'W' meaning player won, else computer won
+        if (outcome.charAt(0) === 'D') continue;
+        else if (outcome.charAt(0) === 'W') playerScore++;
+        else computerScore++;
+        console.log(`Your score is: ${playerScore}, the computers score is: ${computerScore}`);
+    }
+
+    // check which player won
+    if (computerScore === 5) console.log("The computer wins");
+    else console.log("You win!");
+}
+
+game();
